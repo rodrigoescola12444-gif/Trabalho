@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesquisa - Universo do Basquete</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#111;
+    color:white;
+}
+
+header{
+    background:linear-gradient(135deg,#ff7b00,#ff3c00);
+    color:white;
+    text-align:center;
+    padding:30px;
+    box-shadow:0 5px 20px rgba(255,123,0,.4);
+}
+
+nav{
+    background:#000;
+    text-align:center;
+    padding:15px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
+    padding:10px 15px;
+    border-radius:8px;
+    transition:0.3s;
+    font-weight:bold;
+}
+
+nav a:hover{
+    background:#ff7b00;
+    color:black;
+}
+
+.banner{
+    height:250px;
+    background:url('https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1400&auto=format&fit=crop') center/cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.banner h2{
+    background:rgba(0,0,0,0.6);
+    padding:20px;
+    border-radius:10px;
+}
+
+.container{
+    max-width:800px;
+    margin:40px auto;
+    padding:30px;
+    background:#222;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(255,123,0,0.3);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
+
+textarea{
+    resize:none;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    background:#ff7b00;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff5000;
+}
+
+footer{
+    background:#222;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🏀 Universo do Basquete</h1>
+    <p>Pesquisa de Opinião dos Visitantes</p>
+</header>
+
+<nav>
+  <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/Desenvolvimento%20web.html%20Basquete.html">Início</a>
+  <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/Jogadores%20de%20basquete.%20html.html">Jogadores</a>
+  <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/times.html">Times</a>
+  <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/nba.html">NBA</a>
+  <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/Contatos.html">Contato</a>
+  <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/Formulario.html">Pesquisa</a>
+</nav>
+
+<section class="banner">
+    <h2>Sua opinião é muito importante!</h2>
+</section>
+
+<div class="container">
+
+    <h2>Formulário de Avaliação</h2>
+
+    <form id="pesquisa">
+
+        <label>Nome:</label>
+        <input type="text" required>
+
+        <label>E-mail:</label>
+        <input type="email" required>
+
+        <label>Idade:</label>
+        <input type="number" min="1">
+
+        <label>Time favorito:</label>
+        <input type="text">
+
+        <label>Jogador favorito:</label>
+        <input type="text">
+
+        <label>Avaliação do site:</label>
+        <select required>
+            <option>Excelente ⭐⭐⭐⭐⭐</option>
+            <option>Muito Bom ⭐⭐⭐⭐</option>
+            <option>Bom ⭐⭐⭐</option>
+            <option>Regular ⭐⭐</option>
+            <option>Ruim ⭐</option>
+        </select>
+
+        <label>O que gostaria de ver no site?</label>
+        <textarea rows="4"></textarea>
+
+        <label>Comentários:</label>
+        <textarea rows="4"></textarea>
+
+        <button type="submit">Enviar Pesquisa 🏀</button>
+
+    </form>
+
+</div>
+
+<footer>
+    <p>© 2026 Universo do Basquete</p>
+</footer>
+
+<script>
+document.getElementById("pesquisa").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    alert("Obrigado pela sua participação! 🏀");
+
+    this.reset();
+});
+</script>
+
+</body>
+</html>
