@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -21,14 +19,15 @@ body{
 }
 
 header{
-  background:orange;
-  color:black;
+  background: linear-gradient(135deg, #ff7b00, #ff3c00);
+  color:white;
   text-align:center;
-  padding:25px;
+  padding:30px;
+  box-shadow:0 5px 20px rgba(255,123,0,0.4);
 }
 
 nav{
-  background:#222;
+  background:#000;
   text-align:center;
   padding:15px;
 }
@@ -36,12 +35,16 @@ nav{
 nav a{
   color:white;
   text-decoration:none;
-  margin:0 15px;
+  margin:0 10px;
+  padding:10px 15px;
+  border-radius:8px;
+  transition:0.3s;
   font-weight:bold;
 }
 
 nav a:hover{
-  color:orange;
+  background:#ff7b00;
+  color:black;
 }
 
 .hero{
@@ -74,16 +77,17 @@ footer{
 <body>
 
 <header>
-  <h1>🏀 Universo do Basquete</h1>
+  <h1>Universo do Basquete</h1>
   <p>O melhor portal de basquete</p>
 </header>
 
 <nav>
   <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/Desenvolvimento%20web.html%20Basquete.html">Início</a>
-  <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/Jogadores%20de%20basquete.%20html.html">Jogadores</a>
+  <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/Jogadores%20de%20basquete.html">Jogadores</a>
   <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/times.html">Times</a>
   <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/nba.html">NBA</a>
   <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/Contatos.html">Contato</a>
+  <a href="file:///C:/Users/User/Documents/Rodrigo.aula.desenvolvimentoweb/Formulario.html">Formulario</a>
 </nav>
 
 <section class="hero">
@@ -93,8 +97,10 @@ footer{
 <section class="container">
   <h2>Sobre o esporte</h2>
   <p>
-    O basquetebol é um esporte coletivo jogado por duas equipes de cinco jogadores. O objetivo é pontuar arremessando a bola dentro da cesta adversária (o aro). Os pontos são divididos em lances livres (1 ponto), arremessos próximos/dentro do garrafão (2 pontos) ou de longa distância atrás da linha de três pontos.O basquete é um dos esportes mais populares do mundo,
-    conhecido por velocidade, enterradas e grandes estrelas.
+    O basquetebol é um esporte coletivo jogado por duas equipes de cinco jogadores.
+    O objetivo é pontuar arremessando a bola dentro da cesta adversária.
+    O basquete é um dos esportes mais populares do mundo, conhecido por velocidade,
+    enterradas e grandes estrelas.
   </p>
 </section>
 
@@ -102,6 +108,179 @@ footer{
   <p>© 2026 Universo do Basquete</p>
 </footer>
 
+<script>
+window.onload = function(){
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 300;
+    canvas.height = 220;
+    canvas.style.display = "block";
+    canvas.style.margin = "10px auto";
+
+    document.querySelector("header").prepend(canvas);
+
+    const ctx = canvas.getContext("2d");
+
+    let angulo = 0;
+
+    // Física do quique
+    let alturaBola = 50;
+    let velocidade = 0;
+
+    const gravidade = 0.4;
+    const quique = 0.85;
+    const chao = 100;
+
+    // Imagem da bola
+    const imagemBola = new Image();
+    imagemBola.src =
+    "https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png";
+
+    function desenharBola(x, y, r){
+
+        // sombra dinâmica
+        const distanciaDoChao = Math.abs(y - chao);
+
+        ctx.beginPath();
+        ctx.ellipse(
+            x,
+            180,
+            r * (0.9 - distanciaDoChao / 250),
+            r * 0.22,
+            0,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+        `rgba(0,0,0,${0.5 - distanciaDoChao / 250})`;
+
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angulo);
+
+        
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.clip();
+
+        // imagem da bola
+        if(imagemBola.complete){
+
+            ctx.drawImage(
+                imagemBola,
+                -r,
+                -r,
+                r * 2,
+                r * 2
+            );
+
+        } else {
+
+            const grad = ctx.createRadialGradient(
+                -r * 0.3,
+                -r * 0.3,
+                5,
+                0,
+                0,
+                r
+            );
+
+            grad.addColorStop(0, "#ffb347");
+            grad.addColorStop(1, "#c85a00");
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(
+                -r,
+                -r,
+                r * 2,
+                r * 2
+            );
+        }
+
+        
+        const brilho = ctx.createRadialGradient(
+            -r * 0.4,
+            -r * 0.4,
+            5,
+            0,
+            0,
+            r
+        );
+
+        brilho.addColorStop(
+            0,
+            "rgba(255,255,255,0.7)"
+        );
+
+        brilho.addColorStop(
+            1,
+            "rgba(255,255,255,0)"
+        );
+
+        ctx.fillStyle = brilho;
+
+        ctx.fillRect(
+            -r,
+            -r,
+            r * 2,
+            r * 2
+        );
+
+        ctx.restore();
+
+        
+        ctx.beginPath();
+        ctx.arc(
+            x,
+            y,
+            r,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#111";
+        ctx.stroke();
+    }
+
+    function animar(){
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        // gravidade
+        velocidade += gravidade;
+        alturaBola += velocidade;
+
+        
+        if(alturaBola > chao){
+
+            alturaBola = chao;
+
+            velocidade *= -quique;
+        }
+
+        desenharBola(
+            canvas.width / 2,
+            alturaBola,
+            60
+        );
+
+        // rotação
+        angulo += velocidade * 0.02;
+
+        requestAnimationFrame(animar);
+    }
+
+    animar();
+};
+</script>
 </body>
 </html>
-
